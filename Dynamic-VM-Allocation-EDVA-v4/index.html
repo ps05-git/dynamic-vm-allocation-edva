@@ -336,23 +336,76 @@ select,input{font:inherit}
       return;
     }
 
+    
     if (page === 'Scheduler Policies') {
-      main.innerHTML = pageTop(page,'Compare the saved PAPER and EDVA experiment metrics.') +
-        `<div class="grid">
-          <div class="card"><div class="metricLabel">Deadline success · PAPER</div><div class="metric">23.48%</div><div class="sub">Recorded 100-workload run</div></div>
-          <div class="card"><div class="metricLabel">Deadline success · EDVA</div><div class="metric">23.62%</div><div class="sub">Recorded 100-workload run</div></div>
-          <div class="card"><div class="metricLabel">Avg. waiting · PAPER</div><div class="metric">60.46</div><div class="sub">Recorded average</div></div>
-          <div class="card"><div class="metricLabel">Avg. waiting · EDVA</div><div class="metric">60.49</div><div class="sub">Recorded average</div></div>
-        </div>
-        ${table(['Metric','PAPER','EDVA'],[
-          ['Deadline success','23.48%','23.62%'],
-          ['Average waiting time','60.46','60.49'],
-          ['Average preemptions','2.25','2.32'],
-          ['Average makespan','185.07','184.91']
-        ])}
-        <div class="notice">These are saved experiment results, not live measurements. EDVA is not better on every metric. Use Overview to run the Java comparison.</div>`;
+      main.innerHTML = pageTop(
+        page,
+        'Live results from the Java PAPER vs EDVA scheduler.'
+      ) + `
+        <div class="card">
+          <h2>Algorithm Comparison</h2>
+          <p class="muted">
+            Runs the Java comparison on the deployed backend.
+          </p>
+          <button class="action" id="runLivePolicy">
+            Run Comparison
+          </button>
+          <div id="livePolicyStatus" class="notice">
+            Ready to run.
+          </div>
+          <h3>Actual Java Output</h3>
+          <pre id="livePolicyOutput"
+            style="white-space:pre-wrap;overflow-wrap:anywhere;max-height:500px;overflow:auto"></pre>
+        </div>`;
+    
+      document.querySelector('#runLivePolicy').onclick = async () => {
+        const button = document.querySelector('#runLivePolicy');
+        const status = document.querySelector('#livePolicyStatus');
+        const output = document.querySelector('#livePolicyOutput');
+    
+        const base = (
+          localStorage.getItem('edvaApiBaseUrl') || ''
+        ).trim().replace(/\/$/, '');
+    
+        if (!base) {
+          status.textContent =
+            'Backend URL missing. Save it on Overview first.';
+          return;
+        }
+    
+        button.disabled = true;
+        status.textContent = 'Running Java comparison...';
+        output.textContent = '';
+    
+        try {
+          const response = await fetch(base + '/api/scheduler/run', {
+            method: 'POST',
+            cache: 'no-store',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ mode: 'comparison' })
+          });
+    
+          const data = await response.json();
+    
+          if (!response.ok) {
+            throw new Error(data.error || `HTTP ${response.status}`);
+          }
+    
+          output.textContent =
+            data.output || JSON.stringify(data.metrics, null, 2);
+    
+          status.textContent =
+            'Java comparison completed. Output received from backend.';
+        } catch (error) {
+          status.textContent = 'Error: ' + error.message;
+        } finally {
+          button.disabled = false;
+        }
+      };
+    
       return;
     }
+
 
     if (page === 'Workload Experiments') {
       main.innerHTML = pageTop(page,'Explore workload parameters. This form is a browser-side preview.') +
