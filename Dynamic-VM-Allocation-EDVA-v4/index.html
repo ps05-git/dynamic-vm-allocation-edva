@@ -35,7 +35,7 @@ body{margin:0;background:radial-gradient(ellipse at 20% 0%,#17294c 0,transparent
 .metricLabel{color:#9baecc;font-size:12px}
 .metric{font-size:27px;font-weight:750;margin:7px 0 3px}
 .sub{font-size:11px;color:#8194b8}
-.section{display:flex;justify-content:space-between;align-items:end;gap:12px;margin:28px 0 12px}
+.section{display:flex;justify-content:space-between;align-items:end;gap:12px;flex-wrap:wrap;margin:28px 0 12px}
 .section h2{font-size:17px;margin:0}
 .section p{margin:4px 0 0;color:var(--muted);font-size:12px}
 .cols{display:grid;grid-template-columns:1.25fr .75fr;gap:15px}
@@ -47,24 +47,25 @@ td{color:#d8e3f8}
 .status{display:inline-block;border-radius:6px;padding:4px 7px;font-size:10px;font-weight:750;color:#62e4b4;background:#123b36}
 .tag{color:#9ec0ff;background:#1a2d4f;border-radius:6px;padding:4px 7px;font-size:10px}
 .barrow{margin:16px 0}
-.barhead{display:flex;justify-content:space-between;margin-bottom:7px;font-size:12px}
+.barhead{display:flex;justify-content:space-between;gap:10px;margin-bottom:7px;font-size:12px}
 .track{height:8px;border-radius:9px;background:#25334d;overflow:hidden}
 .fill{height:100%;border-radius:9px;background:linear-gradient(90deg,#669dff,#a38bff)}
 .fill.green{background:linear-gradient(90deg,#31bf9b,#73e2c1)}
-.notice{padding:13px 15px;border:1px solid #6b5229;background:#2d2518;border-radius:10px;color:#f5d9a7;font-size:12px;margin-top:17px}
+.notice{padding:13px 15px;border:1px solid #6b5229;background:#2d2518;border-radius:10px;color:#f5d9a7;font-size:12px;margin-top:17px;overflow-wrap:anywhere}
 .foot{margin:25px 0 4px;color:#7486a8;font-size:11px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
-@media(max-width:900px){.shell{grid-template-columns:1fr}.side{display:none}.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.cols{grid-template-columns:1fr}.hero{align-items:flex-start;flex-direction:column}}
-@media(max-width:520px){.grid{grid-template-columns:1fr 1fr}.metric{font-size:22px}.top{align-items:flex-start;flex-direction:column}.main{padding:18px 12px}}
 .control{background:#0b1325;color:#eef4ff;border:1px solid #354a72;border-radius:7px;padding:9px 10px;margin:5px 8px 5px 0;max-width:100%}
 .action{background:#243c65;color:#eef4ff;border:1px solid #4c6fa8;border-radius:8px;padding:9px 13px;cursor:pointer;font:inherit}
 .action:hover{background:#315183}
 .action:disabled{opacity:.55;cursor:wait}
 label{color:#b9c9e5;font-size:12px}
 select,input{font:inherit}
+@media(max-width:900px){.shell{grid-template-columns:1fr}.side{display:none}.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.cols{grid-template-columns:1fr}.hero{align-items:flex-start;flex-direction:column}}
+@media(max-width:520px){.grid{grid-template-columns:1fr 1fr}.metric{font-size:22px}.top{align-items:flex-start;flex-direction:column}.main{padding:18px 12px}}
 </style>
 </head>
 <body>
 <div class="shell">
+
 <aside class="side">
   <div class="brand"><div class="logo">E</div><div>EDVA <span style="color:#8ea7d3;font-weight:500">Cloud</span></div></div>
   <div class="navlabel">CLOUD MANAGEMENT</div>
@@ -78,105 +79,99 @@ select,input{font:inherit}
 </aside>
 
 <main class="main">
-<header class="top">
-  <div>
-    <div class="eyebrow">Cloud computing project / console</div>
-    <h1>Infrastructure Overview</h1>
-    <div class="muted">Dynamic VM Allocation — PAPER vs. EDVA</div>
+  <header class="top">
+    <div>
+      <div class="eyebrow">Cloud computing project / console</div>
+      <h1>Infrastructure Overview</h1>
+      <div class="muted">Dynamic VM Allocation — PAPER vs. EDVA</div>
+    </div>
+    <div class="pill"><i class="dot"></i> Demo snapshot · API connection available</div>
+  </header>
+
+  <section class="hero">
+    <div>
+      <div class="eyebrow" style="color:#a9c5ff">Scheduler comparison environment</div>
+      <h2>Welcome to the EDVA Cloud Console</h2>
+      <p>A web-based view of the Dynamic VM Allocation experiment, with simulated compute instances, scheduler metrics, and live backend controls.</p>
+    </div>
+    <div class="heroTag"><strong>DEMO</strong><span class="muted">Simulated cloud</span></div>
+  </section>
+
+  <section class="grid">
+    <div class="card"><div class="metricLabel">Workloads evaluated</div><div class="metric">100</div><div class="sub">Recorded experiment</div></div>
+    <div class="card"><div class="metricLabel">Jobs per comparison</div><div class="metric">5,000</div><div class="sub">Same workload for both policies</div></div>
+    <div class="card"><div class="metricLabel">Recorded integration processes</div><div class="metric">6 / 6</div><div class="sub">Previous local integration run</div></div>
+    <div class="card"><div class="metricLabel">Simulated VM instances</div><div class="metric" id="overviewVmCount">—</div><div class="sub">Current backend records when loaded</div></div>
+  </section>
+
+  <div class="section">
+    <div><h2>Recorded experiment results</h2><p>Previously measured 100-workload comparison; these are saved results, not the latest live run.</p></div>
+    <span class="tag">SAVED RESULTS</span>
   </div>
-  <div class="pill"><i class="dot"></i> Demo snapshot · API not connected</div>
-</header>
 
-<section class="hero">
-  <div>
-    <div class="eyebrow" style="color:#a9c5ff">Scheduler comparison environment</div>
-    <h2>Welcome to the EDVA Cloud Console</h2>
-    <p>A web-based view of the Dynamic VM Allocation experiment, with simulated compute instances, scheduler metrics, and recorded local integration results.</p>
+  <div class="cols">
+    <div class="card">
+      <div class="barrow"><div class="barhead"><span>Deadline success · PAPER</span><b>23.48%</b></div><div class="track"><div class="fill" style="width:23.48%"></div></div></div>
+      <div class="barrow"><div class="barhead"><span>Deadline success · EDVA</span><b>23.62%</b></div><div class="track"><div class="fill green" style="width:23.62%"></div></div></div>
+      <div class="barrow"><div class="barhead"><span>Average waiting time · PAPER</span><b>60.46</b></div></div>
+      <div class="barrow"><div class="barhead"><span>Average waiting time · EDVA</span><b>60.49</b></div></div>
+      <div class="barrow"><div class="barhead"><span>Average preemptions · PAPER</span><b>2.25</b></div></div>
+      <div class="barrow"><div class="barhead"><span>Average preemptions · EDVA</span><b>2.32</b></div></div>
+    </div>
+    <div class="card">
+      <h3 style="margin:0 0 12px;font-size:14px">Prototype limitations</h3>
+      <p class="muted">The cloud instance records are simulated. Creating or deleting them does not provision or terminate real virtual machines.</p>
+      <div class="notice">Scheduler suspend/resume events are simulated only. These saved metrics are not updated automatically when you run a new Java comparison.</div>
+    </div>
   </div>
-  <div class="heroTag"><strong>2 / 2</strong><span class="muted">Simulated VMs per run</span></div>
-</section>
 
-<section class="grid">
-  <div class="card"><div class="metricLabel">Workloads evaluated</div><div class="metric">100</div><div class="sub">50 jobs per workload</div></div>
-  <div class="card"><div class="metricLabel">Jobs per comparison</div><div class="metric">5,000</div><div class="sub">Same workload for both policies</div></div>
-  <div class="card"><div class="metricLabel">Integration processes</div><div class="metric">6 / 6</div><div class="sub">Succeeded · exit code 0 in recorded run</div></div>
-  <div class="card"><div class="metricLabel">Simulated VM instances</div><div class="metric">2</div><div class="sub">Per algorithm in experiment</div></div>
-</section>
+  <section class="section">
+    <div><h2>Live backend connection</h2><p>Connect this dashboard to your separately hosted Java API.</p></div>
+    <span class="tag">API CONTROL</span>
+  </section>
 
-<div class="section">
-  <div><h2>Compute instances</h2><p>Illustrative instance view based on the local integration run</p></div>
-  <span class="tag">SIMULATED CLOUD</span>
-</div>
-<div class="card tablewrap">
-<table>
-<thead><tr><th>Instance</th><th>Policy</th><th>State</th><th>Workload</th><th>Execution mode</th></tr></thead>
-<tbody>
-<tr><td>paper-vm-01</td><td>PAPER</td><td><span class="status">ACTIVE · SIMULATED</span></td><td>J1 / J3</td><td>Windows host process</td></tr>
-<tr><td>paper-vm-02</td><td>PAPER</td><td><span class="status">ACTIVE · SIMULATED</span></td><td>J2</td><td>Windows host process</td></tr>
-<tr><td>edva-vm-01</td><td>EDVA</td><td><span class="status">ACTIVE · SIMULATED</span></td><td>J1</td><td>Windows host process</td></tr>
-<tr><td>edva-vm-02</td><td>EDVA</td><td><span class="status">ACTIVE · SIMULATED</span></td><td>J2 / J3</td><td>Windows host process</td></tr>
-</tbody>
-</table>
-</div>
+  <div class="card" id="apiConnectionCard">
+    <div style="display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;align-items:end">
+      <div>
+        <label for="apiBaseUrl">Backend API base URL</label>
+        <input id="apiBaseUrl" class="control" style="width:100%;margin-left:0" placeholder="https://your-backend.onrender.com">
+      </div>
+      <button class="action" id="saveApiUrl">Save URL</button>
+    </div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:12px">
+      <button class="action" id="checkApi">Check connection</button>
+      <button class="action" id="runJava">Run Java comparison</button>
+    </div>
+    <div id="apiHealth" class="notice" style="display:none;margin-top:12px"></div>
+    <pre id="schedulerOutput" style="display:none;max-height:340px;overflow:auto;white-space:pre-wrap;background:#070d19;border:1px solid #263653;border-radius:9px;padding:12px;color:#d7e4fa;font-size:11px"></pre>
+  </div>
 
-<div class="section">
-  <div><h2>Experiment results</h2><p>Recorded output from the 100-workload comparison</p></div>
-  <span class="tag">SAVED RESULTS</span>
-</div>
-<div class="cols">
+  <section class="section">
+    <div><h2>Simulated cloud instance management</h2><p>Create, list, and terminate demo instance records through the live Render backend. These are not real VMs.</p></div>
+    <span class="tag">SIMULATED CLOUD</span>
+  </section>
+
   <div class="card">
-    <div class="barrow"><div class="barhead"><span>Deadline success · PAPER</span><b>23.48%</b></div><div class="track"><div class="fill" style="width:23.48%"></div></div></div>
-    <div class="barrow"><div class="barhead"><span>Deadline success · EDVA</span><b>23.62%</b></div><div class="track"><div class="fill green" style="width:23.62%"></div></div></div>
-    <div class="barrow"><div class="barhead"><span>Average waiting time · PAPER</span><b>60.46</b></div></div>
-    <div class="barrow"><div class="barhead"><span>Average waiting time · EDVA</span><b>60.49</b></div></div>
-    <div class="barrow"><div class="barhead"><span>Average preemptions · PAPER</span><b>2.25</b></div></div>
-    <div class="barrow"><div class="barhead"><span>Average preemptions · EDVA</span><b>2.32</b></div></div>
+    <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px">
+      <div>
+        <label for="adminKey">Admin key</label>
+        <input id="adminKey" class="control" type="password" style="width:100%;margin-left:0" placeholder="Not required for simulated instances" disabled>
+      </div>
+      <div>
+        <label for="serverName">New VM name</label>
+        <input id="serverName" class="control" style="width:100%;margin-left:0" value="edva-demo-vm" maxlength="64">
+      </div>
+    </div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:12px">
+      <button class="action" id="loadServers">Refresh simulated instances</button>
+      <button class="action" id="createServer">Create simulated instance</button>
+    </div>
+    <div id="openstackStatus" class="notice" style="display:none;margin-top:12px"></div>
+    <div id="serverList" style="margin-top:12px;overflow:auto"></div>
+    <div class="notice">DEMO ONLY: records are stored in backend memory. They are not real VMs and may disappear when Render restarts. No OpenStack credentials are needed.</div>
   </div>
-  <div class="card">
-    <h3 style="margin:0 0 12px;font-size:14px">Local integration test</h3>
-    <div class="barhead"><span>Windows jobs succeeded</span><b style="color:var(--green)">6 / 6</b></div>
-    <div class="track"><div class="fill green" style="width:100%"></div></div>
-    <p class="muted" style="font-size:12px;margin-top:17px">PAPER and EDVA each submitted three jobs through the local API. The recorded jobs finished with successful exit codes.</p>
-    <div class="notice">Important limitation: scheduler suspend/resume events are simulated only. Submitted Windows processes are not physically paused or resumed by the scheduler. This is not a real OpenStack deployment.</div>
-  </div>
-</div>
 
-<div class="foot"><span>EDVA Cloud Console · Academic prototype</span><span>Static demonstration dashboard · No live API connection</span></div>
-
-<section class="section">
-  <div><h2>Live backend connection</h2><p>Connect this Vercel page to the separately hosted Java/OpenStack API.</p></div>
-  <span class="tag">API CONTROL</span>
-</section>
-<div class="card" id="apiConnectionCard">
-  <div style="display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;align-items:end">
-    <div><label for="apiBaseUrl">Backend API base URL</label><input id="apiBaseUrl" class="control" style="width:100%;margin-left:0" placeholder="https://your-backend.onrender.com"></div>
-    <button class="action" id="saveApiUrl">Save URL</button>
-  </div>
-  <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:12px">
-    <button class="action" id="checkApi">Check connection</button>
-    <button class="action" id="runJava">Run Java comparison</button>
-  </div>
-  <div id="apiHealth" class="notice" style="display:none;margin-top:12px"></div>
-  <pre id="schedulerOutput" style="display:none;max-height:340px;overflow:auto;white-space:pre-wrap;background:#070d19;border:1px solid #263653;border-radius:9px;padding:12px;color:#d7e4fa;font-size:11px"></pre>
-</div>
-
-<section class="section">
-  <div><h2>Simulated cloud instance management</h2><p>Create, list, and terminate OpenStack-style demo instance records through the live Render backend. These are not real VMs.</p></div>
-  <span class="tag">SIMULATED CLOUD</span>
-</section>
-<div class="card">
-  <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px">
-    <div><label for="adminKey">Admin key</label><input id="adminKey" class="control" type="password" style="width:100%;margin-left:0" placeholder="Not required for simulated instances" disabled></div>
-    <div><label for="serverName">New VM name</label><input id="serverName" class="control" style="width:100%;margin-left:0" value="edva-demo-vm" maxlength="64"></div>
-  </div>
-  <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:12px">
-    <button class="action" id="loadServers">Refresh simulated instances</button>
-    <button class="action" id="createServer">Create simulated instance</button>
-  </div>
-  <div id="openstackStatus" class="notice" style="display:none;margin-top:12px"></div>
-  <div id="serverList" style="margin-top:12px;overflow:auto"></div>
-  <div class="notice">DEMO ONLY: instances are in-memory records on the backend. They are not real VMs and disappear when the Render service restarts. No OpenStack credentials are needed.</div>
-</div>
+  <div class="foot"><span>EDVA Cloud Console · Academic prototype</span><span>Java backend + simulated cloud controls</span></div>
 </main>
 </div>
 
@@ -185,13 +180,6 @@ select,input{font:inherit}
   const main = document.querySelector('.main');
   const overviewHTML = main.innerHTML;
   const navs = [...document.querySelectorAll('.nav[data-page]')];
-
-  const instances = [
-    {name:'paper-vm-01',policy:'PAPER',state:'ACTIVE · SIMULATED',workload:'J1 / J3',mode:'Windows host process'},
-    {name:'paper-vm-02',policy:'PAPER',state:'ACTIVE · SIMULATED',workload:'J2',mode:'Windows host process'},
-    {name:'edva-vm-01',policy:'EDVA',state:'ACTIVE · SIMULATED',workload:'J1',mode:'Windows host process'},
-    {name:'edva-vm-02',policy:'EDVA',state:'ACTIVE · SIMULATED',workload:'J2 / J3',mode:'Windows host process'}
-  ];
 
   const logs = [
     ['INFO','PAPER','Submitted local integration job J1','Succeeded · exit code 0'],
@@ -215,7 +203,48 @@ select,input{font:inherit}
     `<div class="card tablewrap"><table><thead><tr>${headers.map(h=>`<th>${h}</th>`).join('')}</tr></thead><tbody>${rows.map(r=>`<tr>${r.map(c=>`<td>${c}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`;
 
   const pageTop = (title, desc) =>
-    `<header class="top"><div><div class="eyebrow">EDVA Cloud Console</div><h1>${title}</h1><div class="muted">${desc}</div></div><div class="pill"><i class="dot"></i> Demo mode · API not connected</div></header>`;
+    `<header class="top"><div><div class="eyebrow">EDVA Cloud Console</div><h1>${title}</h1><div class="muted">${desc}</div></div><div class="pill"><i class="dot"></i> Live API / demo mode</div></header>`;
+
+  function getApiBase() {
+    return (localStorage.getItem('edvaApiBaseUrl') || '').trim().replace(/\/$/,'');
+  }
+
+  async function apiFetch(path, options={}) {
+    const base = getApiBase();
+    if (!base) {
+      throw new Error('Backend URL is missing. Open Overview and save your Render backend URL first.');
+    }
+
+    const response = await fetch(base + path, {
+      ...options,
+      headers: {
+        'Content-Type':'application/json',
+        ...(options.headers || {})
+      }
+    });
+
+    let data = {};
+    try {
+      data = await response.json();
+    } catch {}
+
+    if (!response.ok) {
+      throw new Error(data.error || `HTTP ${response.status}`);
+    }
+
+    return data;
+  }
+
+  function showMessage(element, message, bad=false) {
+    element.style.display = 'block';
+    element.textContent = message;
+    element.style.borderColor = bad ? '#8c3e58' : '#6b5229';
+  }
+
+  async function getLiveInstances() {
+    const data = await apiFetch('/api/simulated/instances');
+    return Array.isArray(data.instances) ? data.instances : [];
+  }
 
   function render(page) {
     navs.forEach(n => n.classList.toggle('active', n.dataset.page === page));
@@ -227,30 +256,83 @@ select,input{font:inherit}
     }
 
     if (page === 'Compute Instances') {
-      main.innerHTML = pageTop(page,'Inspect the four illustrative instances in the saved demo snapshot.') +
-        `<div class="section"><div><h2>Instance inventory</h2><p>These are simulated records, not provisioned cloud VMs.</p></div><button class="action" id="exportInstances">Export CSV</button></div>
-        <div class="card"><label for="policyFilter">Filter by policy </label><select id="policyFilter" class="control"><option>ALL</option><option>PAPER</option><option>EDVA</option></select>
-        <label for="instanceSearch" style="margin-left:12px">Search </label><input class="control" id="instanceSearch" placeholder="Instance or workload"></div><div id="instanceTable" style="margin-top:12px"></div>
-        <div class="notice">SIMULATED CLOUD: this website does not create, start, stop, or resize real VMs.</div>`;
+      main.innerHTML = pageTop(page,'Live simulated instance inventory from the Render backend.') +
+        `<div class="section">
+          <div><h2>Instance inventory</h2><p>Current simulated records; these are not real cloud VMs.</p></div>
+          <button class="action" id="refreshInventory">Refresh instances</button>
+          <button class="action" id="exportInstances">Export CSV</button>
+        </div>
+        <div class="card">
+          <label for="policyFilter">Filter by policy</label>
+          <select id="policyFilter" class="control">
+            <option>ALL</option><option>PAPER</option><option>EDVA</option><option>DEMO</option>
+          </select>
+          <label for="instanceSearch" style="margin-left:12px">Search</label>
+          <input class="control" id="instanceSearch" placeholder="Instance name or ID">
+        </div>
+        <div id="inventoryStatus" class="notice">Loading live instances…</div>
+        <div id="instanceTable" style="margin-top:12px"></div>
+        <div class="notice">SIMULATED CLOUD: these records do not represent provisioned cloud VMs.</div>`;
+
+      let liveInstances = [];
+      const inventoryStatus = document.querySelector('#inventoryStatus');
+      const instanceTable = document.querySelector('#instanceTable');
 
       const draw = () => {
-        const f = document.querySelector('#policyFilter').value;
-        const q = document.querySelector('#instanceSearch').value.toLowerCase();
-        const data = instances.filter(x =>
-          (f === 'ALL' || x.policy === f) &&
-          Object.values(x).join(' ').toLowerCase().includes(q)
+        const filter = document.querySelector('#policyFilter').value;
+        const query = document.querySelector('#instanceSearch').value.trim().toLowerCase();
+
+        const filtered = liveInstances.filter(instance =>
+          (filter === 'ALL' || instance.policy === filter) &&
+          [instance.name,instance.id,instance.policy,instance.status]
+            .join(' ').toLowerCase().includes(query)
         );
-        document.querySelector('#instanceTable').innerHTML =
-          table(['Instance','Policy','State','Workload','Execution mode'],
-            data.map(x => [escapeHTML(x.name),escapeHTML(x.policy),`<span class="status">${escapeHTML(x.state)}</span>`,escapeHTML(x.workload),escapeHTML(x.mode)]));
+
+        instanceTable.innerHTML = table(
+          ['Instance','Policy','State','Instance ID'],
+          filtered.map(instance => [
+            escapeHTML(instance.name),
+            escapeHTML(instance.policy),
+            `<span class="status">${escapeHTML(instance.status)}</span>`,
+            escapeHTML(instance.id)
+          ])
+        );
+      };
+
+      const loadInventory = async () => {
+        const button = document.querySelector('#refreshInventory');
+        button.disabled = true;
+        inventoryStatus.textContent = 'Loading live instances…';
+
+        try {
+          liveInstances = await getLiveInstances();
+          draw();
+          inventoryStatus.textContent = `Loaded ${liveInstances.length} live simulated instance(s).`;
+          const count = document.querySelector('#overviewVmCount');
+          if (count) count.textContent = String(liveInstances.length);
+        } catch (error) {
+          inventoryStatus.textContent = 'Could not load instances: ' + error.message;
+          instanceTable.innerHTML = '';
+        } finally {
+          button.disabled = false;
+        }
       };
 
       document.querySelector('#policyFilter').addEventListener('change',draw);
       document.querySelector('#instanceSearch').addEventListener('input',draw);
-      document.querySelector('#exportInstances').addEventListener('click',() =>
-        downloadCSV('edva-instances.csv',['Instance','Policy','State','Workload','Execution mode'],instances.map(x=>Object.values(x)))
-      );
-      draw();
+      document.querySelector('#refreshInventory').addEventListener('click',loadInventory);
+
+      document.querySelector('#exportInstances').addEventListener('click',() => {
+        downloadCSV(
+          'edva-instances.csv',
+          ['Instance','Policy','State','Instance ID'],
+          liveInstances.map(instance => [
+            instance.name,instance.policy,instance.status,instance.id
+          ])
+        );
+      });
+
+      loadInventory();
       return;
     }
 
@@ -260,42 +342,58 @@ select,input{font:inherit}
           <div class="card"><div class="metricLabel">Deadline success · PAPER</div><div class="metric">23.48%</div><div class="sub">Recorded 100-workload run</div></div>
           <div class="card"><div class="metricLabel">Deadline success · EDVA</div><div class="metric">23.62%</div><div class="sub">Recorded 100-workload run</div></div>
           <div class="card"><div class="metricLabel">Avg. waiting · PAPER</div><div class="metric">60.46</div><div class="sub">Recorded average</div></div>
-          <div class="card"><div class="metricLabel">Avg. waiting · EDVA</div><div class="metric">60.49</div><div class="sub">Recorded average</div></div></div>
-          ${table(['Metric','PAPER','EDVA'],[['Deadline success','23.48%','23.62%'],['Average waiting time','60.46','60.49'],['Average preemptions','2.25','2.32'],['Average makespan','185.07','184.91']])}
-          <div class="notice">These values are saved experiment results, not live measurements. EDVA is not better on every metric.</div>`;
+          <div class="card"><div class="metricLabel">Avg. waiting · EDVA</div><div class="metric">60.49</div><div class="sub">Recorded average</div></div>
+        </div>
+        ${table(['Metric','PAPER','EDVA'],[
+          ['Deadline success','23.48%','23.62%'],
+          ['Average waiting time','60.46','60.49'],
+          ['Average preemptions','2.25','2.32'],
+          ['Average makespan','185.07','184.91']
+        ])}
+        <div class="notice">These are saved experiment results, not live measurements. EDVA is not better on every metric. Use Overview to run the Java comparison.</div>`;
       return;
     }
 
     if (page === 'Workload Experiments') {
-      main.innerHTML = pageTop(page,'Explore workload parameters. This form is a local UI demonstration only.') +
-        `<div class="card"><h2 style="margin-top:0">Configure a demo workload</h2><p class="muted">Changing these values does not run the Java scheduler because the backend is not deployed.</p>
-        <div class="grid" style="grid-template-columns:repeat(2,minmax(0,1fr))">
-          <div><label for="jobCount">Number of jobs</label><input id="jobCount" class="control" type="number" min="1" max="1000" value="50"></div>
-          <div><label for="vmCount">Simulated VMs</label><select id="vmCount" class="control"><option>2</option><option>3</option><option>4</option><option>5</option></select></div>
-          <div><label for="policyChoice">Policy to inspect</label><select id="policyChoice" class="control"><option>PAPER</option><option>EDVA</option></select></div>
-          <div><label for="seedValue">Random seed</label><input id="seedValue" class="control" type="number" value="1"></div></div>
-        <button class="action" id="previewWorkload">Preview configuration</button><div id="workloadPreview" class="notice" style="display:none"></div></div>`;
+      main.innerHTML = pageTop(page,'Explore workload parameters. This form is a browser-side preview.') +
+        `<div class="card">
+          <h2 style="margin-top:0">Configure a demo workload</h2>
+          <p class="muted">This preview does not change the Java scheduler workload.</p>
+          <div class="grid" style="grid-template-columns:repeat(2,minmax(0,1fr))">
+            <div><label for="jobCount">Number of jobs</label><input id="jobCount" class="control" type="number" min="1" max="1000" value="50"></div>
+            <div><label for="vmCount">Simulated VMs</label><select id="vmCount" class="control"><option>2</option><option>3</option><option>4</option><option>5</option></select></div>
+            <div><label for="policyChoice">Policy to inspect</label><select id="policyChoice" class="control"><option>PAPER</option><option>EDVA</option></select></div>
+            <div><label for="seedValue">Random seed</label><input id="seedValue" class="control" type="number" value="1"></div>
+          </div>
+          <button class="action" id="previewWorkload">Preview configuration</button>
+          <div id="workloadPreview" class="notice" style="display:none"></div>
+        </div>`;
 
       document.querySelector('#previewWorkload').addEventListener('click',() => {
         const jobs = Math.max(1,Math.min(1000,Number(document.querySelector('#jobCount').value)||50));
         const vms = document.querySelector('#vmCount').value;
         const policy = document.querySelector('#policyChoice').value;
         const seed = Number(document.querySelector('#seedValue').value)||1;
-        const out = document.querySelector('#workloadPreview');
-        out.style.display = 'block';
-        out.textContent = `Demo configuration ready: ${jobs} jobs, ${vms} simulated VMs, policy ${policy}, seed ${seed}. This is only a preview; no Java scheduler was executed.`;
+        const output = document.querySelector('#workloadPreview');
+        output.style.display = 'block';
+        output.textContent = `Demo configuration ready: ${jobs} jobs, ${vms} simulated VMs, policy ${policy}, seed ${seed}. Preview only; the Java scheduler was not executed.`;
       });
       return;
     }
 
     if (page === 'Event Logs') {
       main.innerHTML = pageTop(page,'Browse the recorded local integration log snapshot.') +
-        `<div class="card"><label for="logFilter">Filter </label><select id="logFilter" class="control"><option>ALL</option><option>PAPER</option><option>EDVA</option><option>SCHEDULER</option></select><button class="action" id="exportLogs" style="margin-left:12px">Export CSV</button></div><div id="logsTable" style="margin-top:12px"></div>
-        <div class="notice">Recorded snapshot only; this page is not receiving live events from the local API.</div>`;
+        `<div class="card">
+          <label for="logFilter">Filter</label>
+          <select id="logFilter" class="control"><option>ALL</option><option>PAPER</option><option>EDVA</option><option>SCHEDULER</option></select>
+          <button class="action" id="exportLogs">Export CSV</button>
+        </div>
+        <div id="logsTable" style="margin-top:12px"></div>
+        <div class="notice">Recorded snapshot only; this page does not receive live scheduler events.</div>`;
 
       const draw = () => {
-        const f = document.querySelector('#logFilter').value;
-        const rows = logs.filter(r => f === 'ALL' || r[1] === f);
+        const filter = document.querySelector('#logFilter').value;
+        const rows = logs.filter(row => filter === 'ALL' || row[1] === filter);
         document.querySelector('#logsTable').innerHTML = table(['Level','Component','Event','Result'],rows);
       };
 
@@ -309,138 +407,143 @@ select,input{font:inherit}
 
     if (page === 'About this prototype') {
       main.innerHTML = pageTop(page,'Project scope, implementation status, and limitations.') +
-        `<div class="card"><h2 style="margin-top:0">Dynamic VM Allocation — PAPER vs. EDVA</h2><p>This is a browser-hosted demonstration dashboard for the Java scheduling experiment.</p>
-        <h3>What works in this hosted demo</h3><ul><li>Sidebar navigation between dashboard sections</li><li>Filtering the simulated instance inventory</li><li>Viewing saved scheduler comparison metrics</li><li>Previewing workload settings in the browser</li><li>Exporting demo instance and event-log data as CSV</li><li>Live API connection, Java comparison, and simulated instance management</li></ul>
-        <h3>What is not connected</h3><ul><li>No real OpenStack infrastructure or VM provisioning</li><li>Scheduler suspend/resume events remain simulated</li></ul>
-        <div class="notice">The current site is a functional front-end prototype, not a production cloud control plane.</div></div>`;
+        `<div class="card">
+          <h2 style="margin-top:0">Dynamic VM Allocation — PAPER vs. EDVA</h2>
+          <p>This is a browser-hosted dashboard for the Java scheduling experiment.</p>
+          <h3>Connected features</h3>
+          <ul>
+            <li>Live backend health check</li>
+            <li>Java PAPER vs. EDVA comparison endpoint</li>
+            <li>Simulated instance listing and creation</li>
+            <li>Simulated instance termination</li>
+            <li>Live Compute Instances inventory, filtering, and CSV export</li>
+          </ul>
+          <h3>Limitations</h3>
+          <ul>
+            <li>No real OpenStack VM provisioning unless separately configured</li>
+            <li>Simulated instance records are held in backend memory</li>
+            <li>Scheduler suspend/resume events remain simulated</li>
+            <li>Saved experiment metrics are separate from each live Java comparison</li>
+          </ul>
+          <div class="notice">This is an academic prototype, not a production cloud control plane.</div>
+        </div>`;
       return;
     }
   }
 
   function downloadCSV(name,headers,rows) {
-    const esc = v => `"${String(v).replaceAll('"','""')}"`;
-    const csv = [headers,...rows].map(r=>r.map(esc).join(',')).join('\r\n');
-    const a = document.createElement('a');
+    const escapeCSV = value => `"${String(value ?? '').replaceAll('"','""')}"`;
+    const csv = [headers,...rows].map(row => row.map(escapeCSV).join(',')).join('\r\n');
     const blobUrl = URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'}));
-    a.href = blobUrl;
-    a.download = name;
-    a.click();
+    const link = document.createElement('a');
+    link.href = blobUrl;
+    link.download = name;
+    link.click();
     setTimeout(() => URL.revokeObjectURL(blobUrl),1000);
   }
 
   function wireOverview() {
-    const pill = main.querySelector('.pill');
-    if (pill) pill.title = 'Saved snapshot plus optional separately hosted API connection.';
-
     const baseInput = document.querySelector('#apiBaseUrl');
     if (!baseInput) return;
 
-    const stored = localStorage.getItem('edvaApiBaseUrl') || '';
-    baseInput.value = stored;
+    baseInput.value = getApiBase();
 
-    const base = () => (baseInput.value || '').trim().replace(/\/$/,'');
     const status = document.querySelector('#apiHealth');
     const cloudStatus = document.querySelector('#openstackStatus');
 
-    const show = (el,msg,bad=false) => {
-      el.style.display = 'block';
-      el.textContent = msg;
-      el.style.borderColor = bad ? '#8c3e58' : '#6b5229';
-    };
-
-    const apiFetch = async (path,options={}) => {
-      if (!base()) throw new Error('Enter your deployed backend URL and click Save URL first.');
-
-      const headers = {'Content-Type':'application/json',...(options.headers||{})};
-      const response = await fetch(base()+path,{...options,headers});
-
-      let data = {};
-      try { data = await response.json(); } catch {}
-
-      if (!response.ok) throw new Error(data.error || `HTTP ${response.status}`);
-      return data;
-    };
-
     document.querySelector('#saveApiUrl').onclick = () => {
-      localStorage.setItem('edvaApiBaseUrl',base());
-      show(status,'Saved backend URL in this browser. Click Check connection to verify it.');
+      const value = baseInput.value.trim().replace(/\/$/,'');
+      if (!value) {
+        showMessage(status,'Enter your Render backend URL first.',true);
+        return;
+      }
+
+      try {
+        const parsed = new URL(value);
+        if (!['http:','https:'].includes(parsed.protocol)) {
+          throw new Error('Use an HTTP or HTTPS URL.');
+        }
+        localStorage.setItem('edvaApiBaseUrl',value);
+        showMessage(status,'Backend URL saved in this browser. Click Check connection to verify it.');
+      } catch (error) {
+        showMessage(status,'Invalid backend URL: '+error.message,true);
+      }
     };
 
     document.querySelector('#checkApi').onclick = async () => {
-      show(status,'Checking backend…');
+      showMessage(status,'Checking backend…');
       try {
-        const d = await apiFetch('/api/health');
-        show(status,`Connected · Java scheduler ${d.javaReady?'ready':'not ready'} · OpenStack ${d.openstackConfigured?'configured':'not configured'}.`);
-      } catch(e) {
-        show(status,'Connection failed: '+e.message,true);
+        const data = await apiFetch('/api/health');
+        showMessage(status,`Connected · Java scheduler ${data.javaReady?'ready':'not ready'} · OpenStack ${data.openstackConfigured?'configured':'not configured'}.`);
+      } catch (error) {
+        showMessage(status,'Connection failed: '+error.message,true);
       }
     };
 
     document.querySelector('#runJava').onclick = async () => {
-      const b = document.querySelector('#runJava');
-      b.disabled = true;
-      b.textContent = 'Running…';
-      show(status,'Running the Java PAPER vs EDVA comparison on the backend…');
+      const button = document.querySelector('#runJava');
+      button.disabled = true;
+      button.textContent = 'Running…';
+      showMessage(status,'Running the Java PAPER vs. EDVA comparison…');
 
       try {
-        const d = await apiFetch('/api/scheduler/run',{
+        const data = await apiFetch('/api/scheduler/run',{
           method:'POST',
           body:JSON.stringify({mode:'comparison'})
         });
 
-        const out = document.querySelector('#schedulerOutput');
-        out.style.display = 'block';
-        out.textContent = d.output || JSON.stringify(d.metrics,null,2);
-        show(status,`Java comparison finished. Parsed metrics: ${d.metrics?.length||0}.`);
-      } catch(e) {
-        show(status,'Scheduler run failed: '+e.message,true);
+        const output = document.querySelector('#schedulerOutput');
+        output.style.display = 'block';
+        output.textContent = data.output || JSON.stringify(data.metrics,null,2);
+        showMessage(status,`Java comparison finished. Parsed metrics: ${data.metrics?.length||0}.`);
+      } catch (error) {
+        showMessage(status,'Scheduler run failed: '+error.message,true);
       } finally {
-        b.disabled = false;
-        b.textContent = 'Run Java comparison';
+        button.disabled = false;
+        button.textContent = 'Run Java comparison';
       }
     };
 
-    // Load simulated instances and display a Terminate button for each one.
-    document.querySelector('#loadServers').onclick = async () => {
-      const loadButton = document.querySelector('#loadServers');
-      loadButton.disabled = true;
-      show(cloudStatus,'Fetching simulated instances from Render…');
+    const listContainer = document.querySelector('#serverList');
+
+    async function loadServers() {
+      const button = document.querySelector('#loadServers');
+      button.disabled = true;
+      showMessage(cloudStatus,'Fetching simulated instances from Render…');
 
       try {
-        const d = await apiFetch('/api/simulated/instances');
-        const list = document.querySelector('#serverList');
+        const instances = await getLiveInstances();
 
-        const rows = (d.instances || []).map(x => [
-          escapeHTML(x.name),
-          escapeHTML(x.policy),
-          escapeHTML(x.status),
-          escapeHTML(x.id),
-          `<button class="action" type="button" data-delete-id="${escapeHTML(x.id)}">Terminate</button>`
-        ]);
-
-        list.innerHTML = table(
+        listContainer.innerHTML = table(
           ['Name','Policy','Status','Instance ID','Action'],
-          rows
+          instances.map(instance => [
+            escapeHTML(instance.name),
+            escapeHTML(instance.policy),
+            `<span class="status">${escapeHTML(instance.status)}</span>`,
+            escapeHTML(instance.id),
+            `<button class="action" type="button" data-delete-id="${escapeHTML(instance.id)}">Terminate</button>`
+          ])
         );
 
-        show(cloudStatus,`Loaded ${rows.length} simulated instance record(s). No real VMs were created.`);
-      } catch(e) {
-        show(cloudStatus,'Could not load simulated instances: '+e.message,true);
-      } finally {
-        loadButton.disabled = false;
-      }
-    };
+        const count = document.querySelector('#overviewVmCount');
+        if (count) count.textContent = String(instances.length);
 
-    // Event delegation lets the buttons continue working after the table refreshes.
-    document.querySelector('#serverList').onclick = async event => {
+        showMessage(cloudStatus,`Loaded ${instances.length} simulated instance record(s). No real VMs were created.`);
+      } catch (error) {
+        showMessage(cloudStatus,'Could not load simulated instances: '+error.message,true);
+      } finally {
+        button.disabled = false;
+      }
+    }
+
+    document.querySelector('#loadServers').onclick = loadServers;
+
+    listContainer.onclick = async event => {
       const button = event.target.closest('button[data-delete-id]');
       if (!button) return;
 
       const id = button.dataset.deleteId;
-
-      if (!confirm(`Terminate simulated instance ${id}? This does not affect real VMs.`)) {
-        return;
-      }
+      if (!confirm(`Terminate simulated instance ${id}? No real VM will be affected.`)) return;
 
       button.disabled = true;
       button.textContent = 'Terminating…';
@@ -450,10 +553,10 @@ select,input{font:inherit}
           method:'DELETE'
         });
 
-        show(cloudStatus,`Simulated instance ${id} terminated successfully.`);
-        await document.querySelector('#loadServers').onclick();
-      } catch(e) {
-        show(cloudStatus,'Termination failed: '+e.message,true);
+        showMessage(cloudStatus,`Simulated instance ${id} terminated successfully.`);
+        await loadServers();
+      } catch (error) {
+        showMessage(cloudStatus,'Termination failed: '+error.message,true);
         button.disabled = false;
         button.textContent = 'Terminate';
       }
@@ -461,37 +564,38 @@ select,input{font:inherit}
 
     document.querySelector('#createServer').onclick = async () => {
       const name = document.querySelector('#serverName').value.trim();
-
       if (!name) {
-        show(cloudStatus,'Enter an instance name first.',true);
+        showMessage(cloudStatus,'Enter an instance name first.',true);
         return;
       }
 
-      const b = document.querySelector('#createServer');
-      b.disabled = true;
-      b.textContent = 'Creating…';
+      const button = document.querySelector('#createServer');
+      button.disabled = true;
+      button.textContent = 'Creating…';
 
       try {
-        const d = await apiFetch('/api/simulated/instances',{
+        const data = await apiFetch('/api/simulated/instances',{
           method:'POST',
           body:JSON.stringify({name})
         });
 
-        show(cloudStatus,`Created simulated instance ${d.instance?.name||name}. No real VM was provisioned.`);
-        await document.querySelector('#loadServers').onclick();
-      } catch(e) {
-        show(cloudStatus,'Simulated instance creation failed: '+e.message,true);
+        showMessage(cloudStatus,`Created simulated instance ${data.instance?.name||name}. No real VM was provisioned.`);
+        await loadServers();
+      } catch (error) {
+        showMessage(cloudStatus,'Simulated instance creation failed: '+error.message,true);
       } finally {
-        b.disabled = false;
-        b.textContent = 'Create simulated instance';
+        button.disabled = false;
+        button.textContent = 'Create simulated instance';
       }
     };
 
-    // Automatically load instances when the Overview page is opened.
-    document.querySelector('#loadServers').click();
+    // Load the live instance list when the Overview page opens.
+    loadServers();
   }
 
-  navs.forEach(n => n.addEventListener('click',() => render(n.dataset.page)));
+  navs.forEach(button => {
+    button.addEventListener('click',() => render(button.dataset.page));
+  });
 
   wireOverview();
 })();
